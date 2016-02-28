@@ -1,29 +1,13 @@
 
-
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var Card = sequelize.define('Card', {//model of Card
-    id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: sequelize.INTEGER
-      },
-      title: {
-        type: sequelize.STRING
-      },
-      priority: {
-        type: sequelize.STRING
-      },
-      status: {
-        type: sequelize.STRING
-      },
-      createdBy: {
-        type: sequelize.STRING
-      },
-      assignedTo : {
-        type: sequelize.STRING
-      }
+  var card = sequelize.define('card', {//model of Card
+      title: DataTypes.STRING,
+      priority: DataTypes.STRING,
+      status: DataTypes.STRING,
+      createdBy: DataTypes.STRING,
+      assignedTo: DataTypes.STRING 
+
   }, {
     classMethods: {
       associate: function(models) {
@@ -31,5 +15,5 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-  return Card;
+  return card;
 };
