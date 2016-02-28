@@ -1,16 +1,15 @@
-angular.module('myApp');
+angular.module('myApp', ['ngRoute']);
 
 var myApp = angular.module('myApp');
 
 myApp
-  .config(function ($routeProvider, MoviesProvider) {
-    MoviesProvider.setEndpoint('/api');
+  .config(function ($routeProvider ) {
+    
   })
   .run([
     '$rootScope',
-    'APP_VERSION',
-    function ($rootScope, APP_VERSION) {
+    function ($rootScope) {
       console.log("start");
-      $rootScope.version = APP_VERSION;
+
     }
   ]);

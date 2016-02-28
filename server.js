@@ -25,7 +25,7 @@ app.post('/api', function (req, res) {
 
 //finding all from our database
 app.get('/api', function (req, res) {
-  db.card.findAll({})
+  db.card.findAll()
     .then(function (cards) {
       res.json(cards);
     });
