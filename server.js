@@ -7,7 +7,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 //making a static server
 app.use(express.static(__dirname + '/public'));
-
+// app.use(require('method-override'));
 
 //posting new 'cards' to our database!!!
 app.post('/api', function (req, res) {
@@ -25,6 +25,18 @@ app.post('/api', function (req, res) {
       console.log(cards);
       return res.redirect('/');
     });
+});
+
+//deleting 
+app.post('/delete/:id', function (req, res) {
+  db.card.destroy({
+    where: {
+      id: req.params.id
+    }
+  })
+  .then(function (deleteCount) {
+    res.json({removed: deleteCount});
+  });
 });
 
 //finding all from our database
