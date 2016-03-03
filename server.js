@@ -11,16 +11,20 @@ app.use(express.static(__dirname + '/public'));
 
 //posting new 'cards' to our database!!!
 app.post('/api', function (req, res) {
-  db.card.create({
-    title: req.body.title,
-    priority: req.body.priority,
-    status: req.body.status,
-    createdBy: req.body.createdBy,
-    assignedTo: req.body.assignedTo,
-  })
-  .then(function (cards) {
-    res.json(cards);
-  });
+  var data = req.body;
+  console.log(data);
+  var card = {
+    title: data.title,
+    priority: data.priority,
+    status: data.status,
+    createdBy: data.createdBy,
+    assignedTo: data.assignedTo
+  };
+  db.card.create(card)
+    .then(function (cards) {
+      console.log(cards);
+      return res.redirect('/');
+    });
 });
 
 //finding all from our database

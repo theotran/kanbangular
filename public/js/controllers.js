@@ -13,5 +13,9 @@ myApp.controller('MyController', [
       $scope.cards = response.data;//then we set the value of cards with the actual data we get back from the server
     });
 
+    // CardService.addCard().then(function (response) {
+    //   console.log("added ", response.data);
+    // });
+
   }
 ]);
