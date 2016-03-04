@@ -5,22 +5,26 @@
   <meta charset="UTF-8">
   <title>Document</title>
   <script>
-    // function allowDrop (ev) {
-    //   ev.preventDefault();
-    // }
-    // function drag (ev) {
-    //   ev.dataTransfer.setData("text", ev.target.class);
-    // }
-
+    function allowDrop (ev) {
+      ev.preventDefault();
+    }
+    function drag (ev) {
+      ev.dataTransfer.setData("text", ev.target.class);
+    }
+    function drop (ev) {
+      ev.preventDefault();
+      var data = ev.dataTransfer.getData("text");
+      ev.target.appendChild(document.getElementsByClassName(data));
+    }
   </script>
 </head>
 
 <body ng-app="myApp">
-  <div id="wrap">
-
+  <div id="wrap" ng-controller="MyController">
+  
   <div class="card-maker">
       <h1>Create a new card</h1>
-      <form action="/api" method="post">
+      <form action="/api" method="post" ng-submit="createCard($event)">
         Title: <input name="title" type="text" ng-model="title" placeholder="title..">
         Priority: <select name="priority">
           <option value="low">Low</option>
@@ -35,16 +39,15 @@
           <option value="student">Student</option>
           <option value="teacher">Teacher</option>
         </select>
-        <button>Add Card</button>
+        <button type="submit">Add Card</button>
       </form>
     </div>
 
     <div class="queue">
       <h2>Queue</h2>
-      <div ng-controller="MyController">
-      <input type="text" placeholder="Card Title">
+      
       <ul>
-        <li class="card" 
+        <li class="card" draggable="true"
             ng-repeat="card in cards  | orderBy:'+title' "><!-- angular assumes that these are variables and not strings -->
  
           <h4 class="_title">{{card.title}}</h4>
@@ -52,12 +55,14 @@
           <p class="_author">{{card.status}}</p>
           <p class="_author">{{card.createdBy}}</p>
           <p class="_author">{{card.assignedTo}}</p>
+          <button ng-click="deleteCard(card.id)">Delete</button>
+          <button ng-click="updateStatus('in-progress', card)">In-Progress</button>
         </li>
       </ul>
-    </div>
+      
     </div>
    
-   <div class="in-progress">
+   <div class="in-progress" ondrop="drop(event)" ondragover="allowDrop(event)">
       <h2>In Progress</h2>
       <div class ="card" draggable="true">Card</div>
     </div>

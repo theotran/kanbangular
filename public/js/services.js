@@ -9,14 +9,13 @@ myApp.service('CardService', [
       return $http({ method: 'GET', url: '/api' });//getting data from the endpoint 
     };
 
-    // this.addCard = function (title, priority) {
-    //   var newCard = {
-    //     title: title,
-    //     priority: priority
-    //   };
-    //   cards.push(newCard);
-    //   return $http({ method: 'POST', url: '/api' });
-    // };
+    this.deleteCard = function (id) {
+      return $http({ method: 'POST', url: '/api/cards/' + id + '/delete'});
+    };
+    this.createCard = function () {
+      return $http({ method: 'POST', url: '/api'});
+    };
+    
   }
 
 ]);

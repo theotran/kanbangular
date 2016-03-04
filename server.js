@@ -21,14 +21,14 @@ app.post('/api', function (req, res) {
     assignedTo: data.assignedTo
   };
   db.card.create(card)
-    .then(function (cards) {
-      console.log(cards);
-      return res.redirect('/');
+    .then(function (card) {
+      console.log(card);
+      return res.json(card);
     });
 });
 
 //deleting 
-app.post('/delete/:id', function (req, res) {
+app.post('/api/cards/:id/delete', function (req, res) {
   db.card.destroy({
     where: {
       id: req.params.id
