@@ -6,11 +6,11 @@ module.exports = {
     var cards = [];
     for (var i=0; i < 5; i++) {
       cards.push({
-        title: "Top Jits Students",
-        priority: "Top",
-        status: "Promoted",
-        createdBy: "Coach",
-        assignedTo: "Theo",
+        title: "Train",
+        priority: "high",
+        status: "queue",
+        createdBy: "Admin",
+        assignedTo: "User",
         createdAt: new Date(),
         updatedAt: new Date()
       });

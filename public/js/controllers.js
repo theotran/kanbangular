@@ -1,6 +1,6 @@
 var myApp = angular.module('myApp');
 
-
+//controller talks to services, services talks to express server, express server talks to db, controller then manipulates the DOM
 
 myApp.controller('MyController', [
   '$scope',
@@ -22,14 +22,28 @@ myApp.controller('MyController', [
     };
     $scope.createCard = function ($event) {
       $event.preventDefault();
-      console.log($event.target.title.value);
-      console.log($event.target.priority.value);
-      console.log($event.target.createdBy.value);
-      console.log($event.target.assignedTo.value);
-      // CardService.createCard().then
+      var newCard = {
+        title: $event.target.title.value,
+        priority: $event.target.priority.value,
+        status: "queue",
+        createdBy: $event.target.createdBy.value,
+        assignedTo: $event.target.assignedTo.value
+      };
+      // console.log(newCard);
+      CardService.createCard(newCard)
+        .then(function (response) {//then refresh
+          CardService.getCards().then(function (response) {
+             $scope.cards = response.data;
+           });
+        });
     };
-    $scope.updateStatus = function (status, card) {
-      card.status = status;
+    $scope.updateStatus = function (id, status, card) {
+      CardService.updateCard(id, status)
+        .then(function (response) {//then refresh
+          CardService.getCards().then(function (response) {
+             $scope.cards = response.data;
+           });
+        });
     };
   }
 ]);

@@ -5,17 +5,17 @@
   <meta charset="UTF-8">
   <title>Document</title>
   <script>
-    function allowDrop (ev) {
-      ev.preventDefault();
-    }
-    function drag (ev) {
-      ev.dataTransfer.setData("text", ev.target.class);
-    }
-    function drop (ev) {
-      ev.preventDefault();
-      var data = ev.dataTransfer.getData("text");
-      ev.target.appendChild(document.getElementsByClassName(data));
-    }
+    // function allowDrop (ev) {
+    //   ev.preventDefault();
+    // }
+    // function drag (ev) {
+    //   ev.dataTransfer.setData("text", ev.target.class);
+    // }
+    // function drop (ev) {
+    //   ev.preventDefault();
+    //   var data = ev.dataTransfer.getData("text");
+    //   ev.target.appendChild(document.getElementsByClassName(data));
+    // }
   </script>
 </head>
 
@@ -24,7 +24,7 @@
   
   <div class="card-maker">
       <h1>Create a new card</h1>
-      <form action="/api" method="post" ng-submit="createCard($event)">
+      <form action="/api" method="post" ng-submit="createCard($event)"><!-- calling our createCard function -->
         Title: <input name="title" type="text" ng-model="title" placeholder="title..">
         Priority: <select name="priority">
           <option value="low">Low</option>
@@ -48,7 +48,7 @@
       
       <ul>
         <li class="card" draggable="true"
-            ng-repeat="card in cards  | orderBy:'+title' "><!-- angular assumes that these are variables and not strings -->
+            ng-repeat="card in cards  | filter : {status: 'queue'} "> 
  
           <h4 class="_title">{{card.title}}</h4>
           <p class="_author">{{card.priority}}</p>
@@ -56,24 +56,52 @@
           <p class="_author">{{card.createdBy}}</p>
           <p class="_author">{{card.assignedTo}}</p>
           <button ng-click="deleteCard(card.id)">Delete</button>
-          <button ng-click="updateStatus('in-progress', card)">In-Progress</button>
+          <button ng-click="updateStatus(card.id,'queue', card)">Queue</button>
+          <button ng-click="updateStatus(card.id,'in-progress', card)">In-Progress</button>
+          <button ng-click="updateStatus(card.id,'done', card)">Done</button>
         </li>
       </ul>
       
     </div>
    
-   <div class="in-progress" ondrop="drop(event)" ondragover="allowDrop(event)">
-      <h2>In Progress</h2>
-      <div class ="card" draggable="true">Card</div>
-    </div>
-    <div class="done">
-      <h2>Done</h2>
-      <div class ="card" draggable="true">Card</div>
-    </div>
+  <div class="in-progress" ondrop="drop(event)" ondragover="allowDrop(event)">
+    <h2>In Progress</h2>
+      <ul>
+        <li class="card" draggable="true"
+            ng-repeat="card in cards  | filter : {status: 'in-progress'} "> 
+ 
+          <h4 class="_title">{{card.title}}</h4>
+          <p class="_author">{{card.priority}}</p>
+          <p class="_author">{{card.status}}</p>
+          <p class="_author">{{card.createdBy}}</p>
+          <p class="_author">{{card.assignedTo}}</p>
+          <button ng-click="deleteCard(card.id)">Delete</button>
+          <button ng-click="updateStatus(card.id, 'queue', card)">Queue</button>
+          <button ng-click="updateStatus(card.id,'in-progress', card)">In-Progress</button>
+          <button ng-click="updateStatus(card.id,'done', card)">Done</button>
+        </li>
+      </ul>
   </div>
 
     
-
+  <div class="done" ondrop="drop(event)" ondragover="allowDrop(event)">
+    <h2>Done</h2>
+      <ul>
+        <li class="card" draggable="true"
+            ng-repeat="card in cards  | filter : {status: 'done'} "> 
+ 
+          <h4 class="_title">{{card.title}}</h4>
+          <p class="_author">{{card.priority}}</p>
+          <p class="_author">{{card.status}}</p>
+          <p class="_author">{{card.createdBy}}</p>
+          <p class="_author">{{card.assignedTo}}</p>
+          <button ng-click="deleteCard(card.id)">Delete</button>
+          <button ng-click="updateStatus(card.id,'queue', card)">Queue</button>
+          <button ng-click="updateStatus(card.id,'in-progress', card)">In-Progress</button>
+          <button ng-click="updateStatus(card.id,'done', card)">Done</button>
+        </li>
+      </ul>
+  </div>
 
   
 
