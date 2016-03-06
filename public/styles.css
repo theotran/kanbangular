@@ -43,8 +43,26 @@ padding: 10px;
 
 .card {
   min-height: 100px;
-  max-height: 200px;
-  background-color: #20F6FB;
+  max-height: 500px;
+  background-image: url("../assets/congruent_pentagon.png");
   margin: 0 auto;
   padding: 0;
 }
+
+.card-maker {
+  background-image: url("../assets/congruent_pentagon.png");
+}
+
+li {
+  list-style-type: none;
+}
+
+h4 {
+  font-family: 'Monofett', cursive;
+  font-size: 30px;
+}
+
+p, h1, h2, #submitButton {
+  font-family: 'Fredoka One', cursive;
+}
+
