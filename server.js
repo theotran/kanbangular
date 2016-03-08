@@ -34,6 +34,23 @@ app.post('/api', function (req, res) {
     });
 });
 
+//posting new users to our database
+app.post('/api/users', function (req, res) {
+  var data = req.body;
+  console.log(data);
+  var user = {
+    firstName: data.firstName,
+    lastName: data.lastName,
+    username: data.username,
+    password: data.password
+  };
+  db.User.create(user)
+    .then(function (user) {
+      console.log(user);
+      return res.json(user);
+    });
+});
+
 //deleting a card
 app.post('/api/cards/:id/delete', function (req, res) {
   db.card.destroy({
@@ -66,7 +83,7 @@ app.put('/api/cards/:id/edit', function (req, res) {
     });
 });
 
-//finding all from our database
+//finding all cards from our database
 app.get('/api', function (req, res) {
   db.card.findAll()
     .then(function (cards) {
@@ -74,6 +91,13 @@ app.get('/api', function (req, res) {
     });
 });
 
+//finding all users from our database
+app.get('/api/users', function (req, res) {
+  db.User.findAll()
+    .then(function (users) {
+      res.json(users);
+    });
+});
 
 var server = app.listen(8080, function () {
   console.log("server listening on ", server.address().port);

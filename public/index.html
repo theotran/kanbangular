@@ -3,7 +3,7 @@
 <head>
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.0/foundation.css">
   <link rel="stylesheet" type="text/css" href="/styles.css">
-  <link href='https://fonts.googleapis.com/css?family=Monofett|Fredoka+One' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Monofett|Fredoka+One|Bangers' rel='stylesheet' type='text/css'>
   
   <meta charset="UTF-8">
   <title>Document</title>
@@ -48,23 +48,21 @@
 
     <div class="queue">
       <h2>Queue</h2>
-      
       <ul>
         <li class="card" draggable="true"
             ng-repeat="card in cards  | filter : {status: 'queue'} "> 
- 
           <h4 class="_title">{{card.title}}</h4>
           <p class="_author">Priority: {{card.priority}}</p>
           <p class="_author">Status: {{card.status}}</p>
           <p class="_author">Created By: {{card.createdBy}}</p>
-          <p class="_author"> Assinged: {{card.assignedTo}}</p>
+          <p class="_author"> Assigned: {{card.assignedTo}}</p>
+          <p class="_author"> ID #: {{card.id}}</p>
           <button ng-click="deleteCard(card.id)">Delete</button>
           <button ng-click="updateStatus(card.id,'queue', card)">Queue</button>
           <button ng-click="updateStatus(card.id,'in-progress', card)">In-Progress</button>
           <button ng-click="updateStatus(card.id,'done', card)">Done</button>
         </li>
       </ul>
-      
     </div>
    
   <div class="in-progress" ondrop="drop(event)" ondragover="allowDrop(event)">
@@ -77,7 +75,7 @@
           <p class="_author">Priority: {{card.priority}}</p>
           <p class="_author">Status: {{card.status}}</p>
           <p class="_author">Created By: {{card.createdBy}}</p>
-          <p class="_author"> Assinged: {{card.assignedTo}}</p>
+          <p class="_author"> Assigned: {{card.assignedTo}}</p>
           <button ng-click="deleteCard(card.id)">Delete</button>
           <button ng-click="updateStatus(card.id, 'queue', card)">Queue</button>
           <button ng-click="updateStatus(card.id,'in-progress', card)">In-Progress</button>
@@ -97,7 +95,7 @@
           <p class="_author">Priority: {{card.priority}}</p>
           <p class="_author">Status: {{card.status}}</p>
           <p class="_author">Created By: {{card.createdBy}}</p>
-          <p class="_author"> Assinged: {{card.assignedTo}}</p>
+          <p class="_author"> Assigned: {{card.assignedTo}}</p>
           <button ng-click="deleteCard(card.id)">Delete</button>
           <button ng-click="updateStatus(card.id,'queue', card)">Queue</button>
           <button ng-click="updateStatus(card.id,'in-progress', card)">In-Progress</button>
