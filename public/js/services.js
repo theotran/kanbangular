@@ -10,8 +10,12 @@ myApp.service('CardService', [
     };
 
     this.getUsers = function () {
-      return $http({ method: 'GET', url: '/api' });
-    }
+      return $http({ method: 'GET', url: '/api/users' });
+    };
+    this.createUser = function (data) {
+      //same thing as above methods, just doing it a diff way .post
+      return $http.post('/api/users', data);
+    };
 
     this.deleteCard = function (id) {
       return $http({ method: 'POST', url: '/api/cards/' + id + '/delete'});

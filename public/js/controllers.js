@@ -9,9 +9,19 @@ myApp.controller('MyController', [
 
     $scope.CardService = CardService;
     $scope.cards = [];//initially set cards to an empty array since we used ng-repeat
+    
+    $scope.users = [];//same thing with users
+
+    //getting our cards from the card db
     CardService.getCards().then(function (response) {
       $scope.cards = response.data;//then we set the value of cards with the actual data we get back from the server
     });
+
+    //getting users form the Users db
+    CardService.getUsers().then(function (response) {
+      $scope.card = response.data;
+    });
+
     $scope.deleteCard = function (id) {
       CardService.deleteCard(id).then(function (response) {
       //after we delete, fetch the cards and refresh the page
@@ -20,9 +30,10 @@ myApp.controller('MyController', [
         });
       });
     };
+    //creating a new card
     $scope.createCard = function ($event) {
       $event.preventDefault();
-      var newCard = {
+      var newCard = {//$event.target is what our values are in the form 
         title: $event.target.title.value,
         priority: $event.target.priority.value,
         status: "queue",
@@ -37,6 +48,24 @@ myApp.controller('MyController', [
            });
         });
     };
+    //creating a new user
+    $scope.createUser = function ($event) {
+      $event.preventDefault();
+      var newUser = {
+        firstName: $event.target.firstName.value,
+        lastName: $event.target.lastName.value,
+        username: $event.target.username.value,
+        password: $event.target.password.value 
+      };
+      console.log(newUser);
+      CardService.createUser(newUser)
+        .then(function (response) {
+          CardService.getUsers().then(function (response) {
+            $scope.users = response.data;
+          });
+        });
+    };
+
     $scope.updateStatus = function (id, status, card) {
       CardService.updateCard(id, status)
         .then(function (response) {//then refresh

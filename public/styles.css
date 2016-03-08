@@ -62,7 +62,7 @@ h4 {
   font-size: 30px;
 }
 
-p, h1, h2, #submitButton {
+p, h1, h2, .submitButton {
   font-family: 'Fredoka One', cursive;
 }
 
