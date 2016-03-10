@@ -1,0 +1,29 @@
+* {
+box-sizing: border-box;
+}
+
+body,
+html {
+margin:0;
+padding:0;
+color:#000;
+background:#a7a09a;
+background-image: url("../assets/upfeathers.png");
+}
+
+.user-maker {
+  /*background-image: url("../assets/congruent_pentagon.png");*/
+}
+
+h4 {
+  font-family: 'Monofett', cursive;
+  font-size: 30px;
+}
+
+p, h1, h2, .submitButton {
+  font-family: 'Fredoka One', cursive;
+}
+
+button {
+  font-family: 'Bangers', cursive;
+}

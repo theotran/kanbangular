@@ -48,23 +48,29 @@ myApp.controller('MyController', [
            });
         });
     };
-    //creating a new user
-    $scope.createUser = function ($event) {
-      $event.preventDefault();
-      var newUser = {
-        firstName: $event.target.firstName.value,
-        lastName: $event.target.lastName.value,
-        username: $event.target.username.value,
-        password: $event.target.password.value 
-      };
-      console.log(newUser);
-      CardService.createUser(newUser)
-        .then(function (response) {
-          CardService.getUsers().then(function (response) {
-            $scope.users = response.data;
-          });
-        });
-    };
+    // //creating a new user
+    // $scope.createUser = function ($event) {
+    //   $event.preventDefault();
+    //   var newUser = {
+    //     firstName: $event.target.firstName.value,
+    //     lastName: $event.target.lastName.value,
+    //     username: $event.target.username.value,
+    //     password: $event.target.password.value 
+    //   };
+    //   console.log(newUser);
+    //   CardService.createUser(newUser)
+    //     .then(function (response) {
+    //       CardService.getUsers().then(function (response) {
+    //         $scope.users = response.data;
+    //       });
+    //     })
+    //     .then(function () {//resetting our form with blank values after you create a user
+    //       $scope.firstName = '';
+    //       $scope.lastName = '';
+    //       $scope.username = '';
+    //       $scope.password = '';
+    //     });
+    // };
 
     $scope.updateStatus = function (id, status, card) {
       CardService.updateCard(id, status)

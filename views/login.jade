@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+html
+  body
+    link(rel='stylesheet', type='text/css', href='https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.0/foundation.css')
+    link(rel='stylesheet', type='text/css', href='/login-page-styles.css')
+    link(href='https://fonts.googleapis.com/css?family=Monofett|Fredoka+One|Bangers', rel='stylesheet', type='text/css')
+    .user-login
+      h3 Login
+      h2 Create a new user
+      form(action='/create-user', method='post')
+        | First Name: 
+        input(name='firstName', type='text', placeholder='firstName')
+        |     Last Name: 
+        input(name='lastName', type='text', placeholder='lastName')
+        |     Username: 
+        input(name='username', type='text', placeholder='username')
+        |     Password: 
+        input(name='password', type='password', placeholder='password')
+        button.submitButton(type='submit') Login
+    .user-maker
+      h3 Don't have an account? Let's make one!
+      h2 Create a new user
+      form(action='/create-user', method='post')
+        | First Name: 
+        input(name='firstName', type='text', placeholder='firstName')
+        |     Last Name: 
+        input(name='lastName', type='text', placeholder='lastName')
+        |     Username: 
+        input(name='username', type='text', placeholder='username')
+        |     Password: 
+        input(name='password', type='password', placeholder='password')
+        button.submitButton(type='submit') Add User

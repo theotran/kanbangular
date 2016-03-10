@@ -3,6 +3,10 @@ var app = express();
 var db = require('./models');
 
 var bodyParser = require('body-parser');
+
+app.set('view engine', 'jade');//Tell Express which Template engine we are using by NPM module name
+app.set('views', 'views');//tell express where our template files live
+
 app.use(bodyParser.urlencoded({extended: false}));
 //for bodyparser to know that the body being sent is a json obj 
 app.use(bodyParser.json());
@@ -15,6 +19,11 @@ app.use(methodOverride('_method'));
 //making a static server
 app.use(express.static(__dirname + '/public'));
 // app.use(require('method-override'));
+
+
+app.get('/login', function (req, res) {
+  res.render('login');
+});
 
 //posting new 'cards' to our database!!!
 app.post('/api', function (req, res) {
@@ -35,7 +44,7 @@ app.post('/api', function (req, res) {
 });
 
 //posting new users to our database
-app.post('/api/users', function (req, res) {
+app.post('/create-user', function (req, res) {
   var data = req.body;
   console.log(data);
   var user = {
@@ -47,8 +56,20 @@ app.post('/api/users', function (req, res) {
   db.User.create(user)
     .then(function (user) {
       console.log(user);
-      return res.json(user);
+      return res.redirect('/login');
     });
+});
+
+//deleting a user from the "Users" db
+app.post('/api/users/:id/delete', function (req, res) {
+  db.User.destroy({
+    where: {
+      id: req.params.id
+    }
+  })
+  .then(function (deleteCount) {
+    res.json({removed: deleteCount});
+  });
 });
 
 //deleting a card
