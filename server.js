@@ -58,7 +58,7 @@ passport.use(new localStrategy(
 
 passport.serializeUser(function (user, done) {//putting an id on our object
   console.log(user);
-  return done(null, user.id);
+  return done(null, user.id);//user.id allows you to pass on id
 });
 
 passport.deserializeUser(function (id, done) {//grabbing the id on our object

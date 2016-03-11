@@ -47,11 +47,8 @@
         </select>
         Created By: <select name="createdBy">
           <option value="Theo">Theo</option>
-          <option value="Guest">Guest</option>
         </select>
-        Assigned To: <select name="assignedTo">
-          <option value="Student">Student</option>
-          <option value="Teacher">Teacher</option>
+        Assigned To: <select ng-options="user as user.username for user in users" ng-model="selected">
         </select>
         <button class="submitButton" type="submit">Add Card</button>
       </form>

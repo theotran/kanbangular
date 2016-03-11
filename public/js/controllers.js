@@ -19,7 +19,7 @@ myApp.controller('MyController', [
 
     //getting users form the Users db
     CardService.getUsers().then(function (response) {
-      $scope.card = response.data;
+      $scope.users = response.data;
     });
 
     $scope.deleteCard = function (id) {
