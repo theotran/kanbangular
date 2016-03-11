@@ -40,17 +40,16 @@
       <h1>Create a new card</h1>
       <form action="/api" method="post" ng-submit="createCard($event)"><!-- calling our createCard function -->
         Title: <input name="title" type="text" ng-model="title" placeholder="title..">
-        Priority: <select name="priority">
+        Priority: <select name="priority" ng-model="priority">
           <option value="Low">Low</option>
           <option value="Medium">Medium</option>
           <option value="High">High</option>
         </select>
-        Created By: <select name="createdBy">
-          <option value="Theo">Theo</option>
+        Created By: <select ng-options="user.username as user.username for user in users" ng-model="selectedCreator">
         </select>
-        Assigned To: <select ng-options="user as user.username for user in users" ng-model="selected">
+        Assigned To: <select ng-options="user.username as user.username for user in users" ng-model="selectedAssignee">
         </select>
-        <button class="submitButton" type="submit">Add Card</button>
+        <button class="submitButton button" type="submit">Add Card</button>
       </form>
     </div>
 
@@ -65,10 +64,10 @@
           <p class="_author">Created By: {{card.createdBy}}</p>
           <p class="_author"> Assigned: {{card.assignedTo}}</p>
           <p class="_author"> ID #: {{card.id}}</p>
-          <button ng-click="deleteCard(card.id)">Delete</button>
-          <button ng-click="updateStatus(card.id,'queue', card)">Queue</button>
-          <button ng-click="updateStatus(card.id,'in-progress', card)">In-Progress</button>
-          <button ng-click="updateStatus(card.id,'done', card)">Done</button>
+          <button class="button alert" ng-click="deleteCard(card.id)">Delete</button>
+          <button class="button" ng-click="updateStatus(card.id,'queue', card)" ng-hide="card.status === 'queue'">Queue</button>
+          <button class="button warning" ng-click="updateStatus(card.id,'in-progress', card)">In-Progress</button>
+          <button class="button success" ng-click="updateStatus(card.id,'done', card)">Done</button>
         </li>
       </ul>
     </div>
@@ -84,10 +83,10 @@
           <p class="_author">Status: {{card.status}}</p>
           <p class="_author">Created By: {{card.createdBy}}</p>
           <p class="_author"> Assigned: {{card.assignedTo}}</p>
-          <button ng-click="deleteCard(card.id)">Delete</button>
-          <button ng-click="updateStatus(card.id, 'queue', card)">Queue</button>
-          <button ng-click="updateStatus(card.id,'in-progress', card)">In-Progress</button>
-          <button ng-click="updateStatus(card.id,'done', card)">Done</button>
+          <button class="button alert" ng-click="deleteCard(card.id)">Delete</button>
+          <button class="button" ng-click="updateStatus(card.id, 'queue', card)">Queue</button>
+          <button class="button warning" ng-click="updateStatus(card.id,'in-progress', card)" ng-hide="card.status === 'in-progress'">In-Progress</button>
+          <button class="button success" ng-click="updateStatus(card.id,'done', card)">Done</button>
         </li>
       </ul>
   </div>
@@ -104,10 +103,10 @@
           <p class="_author">Status: {{card.status}}</p>
           <p class="_author">Created By: {{card.createdBy}}</p>
           <p class="_author"> Assigned: {{card.assignedTo}}</p>
-          <button ng-click="deleteCard(card.id)">Delete</button>
-          <button ng-click="updateStatus(card.id,'queue', card)">Queue</button>
-          <button ng-click="updateStatus(card.id,'in-progress', card)">In-Progress</button>
-          <button ng-click="updateStatus(card.id,'done', card)">Done</button>
+          <button class="button alert" ng-click="deleteCard(card.id)">Delete</button>
+          <button class="button" ng-click="updateStatus(card.id,'queue', card)">Queue</button>
+          <button class="button warning" ng-click="updateStatus(card.id,'in-progress', card)">In-Progress</button>
+          <button class="button success" ng-click="updateStatus(card.id,'done', card)" ng-hide="card.status === 'done'">Done</button>
         </li>
       </ul>
   </div>

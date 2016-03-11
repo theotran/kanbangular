@@ -33,12 +33,19 @@ myApp.controller('MyController', [
     //creating a new card
     $scope.createCard = function ($event) {
       $event.preventDefault();
+      console.log($scope.selectedCreator);
+      debugger;
       var newCard = {//$event.target is what our values are in the form 
-        title: $event.target.title.value,
-        priority: $event.target.priority.value,
-        status: "queue",
-        createdBy: $event.target.createdBy.value,
-        assignedTo: $event.target.assignedTo.value
+        // title: $event.target.title.value,
+        // priority: $event.target.priority.value,
+        // status: "queue",
+        // createdBy: $event.target.createdBy.value,
+        // assignedTo: $event.target.assignedTo.value
+          title: $scope.title,
+          priority: $scope.priority,
+          status: "queue",
+          createdBy: $scope.selectedCreator,
+          assignedTo: $scope.selectedAssignee
       };
       // console.log(newCard);
       CardService.createCard(newCard)
@@ -46,6 +53,13 @@ myApp.controller('MyController', [
           CardService.getCards().then(function (response) {
              $scope.cards = response.data;
            });
+        })
+        .then(function () {//resetting form with blank values
+          $scope.title = '';
+          $scope.priority = '';
+          $scope.status = '';
+          $scope.createdBy = '';
+          $scope.assignedTo = '';
         });
     };
     // //creating a new user
