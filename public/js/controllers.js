@@ -34,13 +34,7 @@ myApp.controller('MyController', [
     $scope.createCard = function ($event) {
       $event.preventDefault();
       console.log($scope.selectedCreator);
-      debugger;
-      var newCard = {//$event.target is what our values are in the form 
-        // title: $event.target.title.value,
-        // priority: $event.target.priority.value,
-        // status: "queue",
-        // createdBy: $event.target.createdBy.value,
-        // assignedTo: $event.target.assignedTo.value
+      var newCard = {//$event.target.title.value is what our values are in the form 
           title: $scope.title,
           priority: $scope.priority,
           status: "queue",

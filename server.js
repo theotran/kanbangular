@@ -169,7 +169,7 @@ app.put('/api/cards/:id/edit', function (req, res) {
     });
 });
 
-
+//taking us to our app after authenticating a user
 app.get('/', isAuthenticated, function (req, res) {
   res.sendFile(path.resolve('./public/kanban.html'));//makes the path more absolute, helps get the filename etc...
 });

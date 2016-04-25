@@ -10,6 +10,5 @@ myApp
     '$rootScope',
     function ($rootScope) {
       console.log("start");
-
     }
   ]);
