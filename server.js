@@ -34,7 +34,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-//looking in our Users database for the user!
+//looking in our Users database for the user
 passport.use(new localStrategy(
   function (username, password, done) {
     db.User.find({
@@ -61,7 +61,7 @@ passport.serializeUser(function (user, done) {//putting an id on our object
   return done(null, user.id);//user.id allows you to pass on id
 });
 
-passport.deserializeUser(function (id, done) {//grabbing the id on our object
+passport.deserializeUser(function (id, done) {//getting the id on our object
   console.log('your id is :', id);
   db.User.findById(id)
     .then(function (user) {
